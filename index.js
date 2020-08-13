@@ -4,6 +4,9 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+// Initiate database
+require('./api/db/index');
+
 // Router setup
 const router = require('./api/routes');
 app.use(router);

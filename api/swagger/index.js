@@ -13,8 +13,8 @@ const swaggerDefinition = {
       description: "Users"
     },
     {
-      name: 'products',
-      description: "Products"
+      name: 'items',
+      description: "items"
     },
     {
       name: 'integrations',
