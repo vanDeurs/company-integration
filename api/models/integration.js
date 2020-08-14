@@ -9,7 +9,8 @@ const IntegrationSchema = mongoose.Schema({
   },
   owner: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   isActive: {
     type: Boolean,
@@ -18,7 +19,8 @@ const IntegrationSchema = mongoose.Schema({
   },
   created: {
     type: Number,
-    default: Date.now
+    default: Date.now,
+    required: true
   },
   label: {
     type: String
@@ -28,7 +30,9 @@ const IntegrationSchema = mongoose.Schema({
 IntegrationSchema.statics.findByKey = async function (apiKey) {
   const Integration = this;
   try {
-    const integration = await Integration.findOne({ apiKey, isActive: true }).populate('owner');
+    const integration = await Integration.findOne({ apiKey, isActive: true })
+    .populate('owner');
+
     return integration
   } catch (error) {
     console.log('error: ', error);

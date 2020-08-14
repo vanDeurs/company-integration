@@ -80,7 +80,8 @@ UnitSchema.statics.findByCredentials = async function (data) {
   const User = this;
 
   try {
-    const user = await User.findOne({ email }).populate('items apiKeys');
+    const user = await User.findOne({ email })
+    .populate('items apiKeys');
   
     if (user) {
       const passwordMatch = await bcrypt.compare(password, user.password);
