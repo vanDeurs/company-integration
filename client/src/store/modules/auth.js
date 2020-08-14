@@ -32,18 +32,6 @@ const actions = {
       console.log(error);
     }
   },
-  async SIGN_IN(context) {
-    try {
-      const response = await api.post("/users/sign-in");
-      const user = response.data;
-      if (user) {
-        context.commit("SET_USER", user);
-        Cookies.set("token", user.token, { expires: 1 });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  },
   async SIGN_OUT(context) {
     try {
       await api.delete("/users/sign-out");

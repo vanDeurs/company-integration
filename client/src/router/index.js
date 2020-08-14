@@ -43,12 +43,13 @@ const router = new VueRouter({
   routes
 });
 
-async function protectedRoute (to, from, next) {
-  if (store.state.auth.user === undefined || !Cookies.get('token')) {
-    await store.dispatch('AUTHENTICATE')
+async function protectedRoute() {
+  if (store.state.auth.user === undefined || !Cookies.get("token")) {
+    await store.dispatch("AUTHENTICATE");
   }
-  if (!store.state.auth.user) router.push('/sign-in')
-  next()
+  if (!store.state.auth.user) {
+    store.dispatch("SIGN_OUT");
+  }
 }
 
 export default router;

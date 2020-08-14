@@ -1,3 +1,5 @@
+const User = require('../models/user');
+
 exports.signIn = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -14,15 +16,29 @@ exports.signIn = async (req, res) => {
         })
       }
     }
-    res.status(400).json({ message: 'Login failed.' })
+    res.status(400).json({ message: 'Invalid e-mail or password.' })
   } catch (error) {
     console.log('signIn error: ', error);
-    res.status(400).json({ message: 'Login failed.' })
+    res.status(400).json({ message: 'Invalid e-mail or password.' })
   }
 }
 exports.signOut = async (req, res) => {
 
 }
 exports.signUp = async (req, res) => {
+  const { email, name, password } = req.body;
 
+  if (!email || !name || !password) return res.status(400).json({ message: "Missing parameters." })
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(422).json({ message: "This email is already registered." });
+    }
+    const user = await User.create(req.body);
+    res.status(201).json({ user });
+  } catch (error) {
+    console.log(error);
+    res.status(422).json({ message: "Could not register." });
+  }
 }

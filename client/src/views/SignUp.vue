@@ -1,7 +1,7 @@
 <template>
   <div class="sign-up">
     <div class="container content">
-      <form class="form box-shadow-1" @submit.prevent="onSubmit">
+      <form class="form box-shadow-1" @submit.prevent="register()">
         <h2>Registera dig</h2>
         <input
           v-model="email"
@@ -39,7 +39,7 @@
         <div class="text-right">
           <button class="success">Registera</button>
         </div>
-        <p>Redan medlem? <router-link to="/sign-in">Logga in</router-link></p>
+        <p>Redan medlem? <router-link to="/sign-in">Logga in!</router-link></p>
       </form>
     </div>
   </div>
@@ -47,6 +47,7 @@
 
 <script>
 import api from "@/api";
+import Cookies from "js-cookie";
 
 export default {
   name: "sign-up",
@@ -60,7 +61,7 @@ export default {
     };
   },
   methods: {
-    async onSubmit() {
+    async register() {
       this.errors = {};
       const { email, name, password, passwordRepeat } = this;
 
@@ -74,15 +75,15 @@ export default {
       if (this.errors.error || this.errors.password) return;
 
       try {
-        const response = await api.post("/users/sign-up", {
+        const response = await api().post("/users/sign-up", {
           email,
           name,
           password
         });
-        const user = response.data;
-
-        if (user) {
+        if (response.data.user) {
+          const { user } = response.data;
           this.$store.commit("SET_USER", user);
+          Cookies.set("token", user.token, { expires: 1 });
           this.$router.push("/");
         }
       } catch (error) {

@@ -22,13 +22,13 @@
         <p v-if="errors.error" class="error">
           {{ errors.error }}
         </p>
-        <p>
-          <router-link to="/reset-password">Forgot your password?</router-link>
-        </p>
         <div class="text-right">
           <button class="success">Sign in</button>
         </div>
-        <p>Not a member? <router-link to="/sign-up">Sign up</router-link>.</p>
+        <p>
+          Inte medlem?
+          <router-link to="/sign-up">Registrera dig!</router-link>
+        </p>
       </form>
     </div>
   </div>
@@ -36,6 +36,7 @@
 
 <script>
 import api from "@/api";
+import Cookies from "js-cookie";
 
 export default {
   name: "sign-in",
@@ -56,16 +57,20 @@ export default {
       }
 
       try {
-        const response = await api.post("/users/sign-in", { email, password });
-        const user = response.data;
-
-        if (user) {
+        const response = await api().post("/users/sign-in", {
+          email,
+          password
+        });
+        if (response.data.user) {
+          const { user } = response.data;
           this.$store.commit("SET_USER", user);
+          Cookies.set("token", user.token, { expires: 1 });
           this.$router.push("/");
         }
       } catch (error) {
+        console.log("error: ", error);
         const code = error.response.status;
-        if (code === 401) {
+        if (code === 400) {
           this.errors = {
             ...this.errors,
             password_email: "Invalid e-mail or password."
