@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const UserSchema = mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const UserSchema = Schema({
   email: {
     type: String,
     required: true,
@@ -44,7 +46,7 @@ UserSchema.methods.comparePassword = function (password) {
   return result;
 }
 
-UnitSchema.methods.generateAuthToken = async function () {
+UserSchema.methods.generateAuthToken = async function () {
   const user = this;
 
   // Create login token
@@ -75,7 +77,7 @@ UserSchema.statics.findByToken = async function (token) {
   return user;
 }
 
-UnitSchema.statics.findByCredentials = async function (data) {
+UserSchema.statics.findByCredentials = async function (data) {
   const { email, password } = data;
   const User = this;
 

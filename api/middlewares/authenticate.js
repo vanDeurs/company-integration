@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Integration = require('../models/integration');
 
-const authenticate = (req, res, next) => {
+const authenticate = async (req, res, next) => {
   /**
    * Authenticate the user either by the token (logged in),
    * or by the apiKey (integration).

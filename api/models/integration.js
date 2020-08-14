@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const { uuidv4 } = require('../utils/uuid4');
 
-const IntegrationSchema = mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const IntegrationSchema = Schema({
   apiKey: {
     type: String,
     default: uuidv4,
