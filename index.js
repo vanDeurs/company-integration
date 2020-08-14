@@ -9,7 +9,7 @@ require('./api/db/index');
 
 // Router setup
 const router = require('./api/routes');
-app.use(router);
+app.use('/api', router);
 
 // Swagger setup
 const swaggerUi = require('swagger-ui-express');
