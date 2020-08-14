@@ -1,4 +1,4 @@
-const authenticationWall = (req, res, next) => {
+const authenticateWall = (req, res, next) => {
     if (!req.me) {
       throw Error('NOT AUTHENTICATED')
     }
@@ -7,5 +7,5 @@ const authenticationWall = (req, res, next) => {
 }
 
 module.exports = {
-  authenticationWall
+  authenticateWall
 }
