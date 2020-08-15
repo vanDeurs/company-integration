@@ -10,9 +10,9 @@ export default {
   name: "Home",
   components: {},
   computed: {
-    name () {
+    name() {
       return store.state.auth.user.name;
     }
-  },
+  }
 };
 </script>

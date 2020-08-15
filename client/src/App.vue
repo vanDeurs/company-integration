@@ -2,8 +2,9 @@
   <div id="app">
     <div id="nav" v-if="this.$store.state.auth.user">
       <router-link to="/">Start</router-link> |
-      <router-link to="/saker">Saker</router-link>
-      <router-link to="/logga-ut">Logga ut</router-link>
+      <router-link to="/items">Saker</router-link>
+      <router-link to="/developer">Utvecklare</router-link>
+      <router-link to="/sign-out">Logga ut</router-link>
     </div>
     <router-view />
   </div>

@@ -2,7 +2,7 @@
   <div class="sign-in">
     <div class="container">
       <form class="form box-shadow-1" @submit.prevent="onSubmit">
-        <h2>Sign in</h2>
+        <h2>Logga in</h2>
         <input
           v-model="email"
           placeholder="E-mail"
@@ -23,7 +23,7 @@
           {{ errors.error }}
         </p>
         <div class="text-right">
-          <button class="success">Sign in</button>
+          <button class="success">Logga in</button>
         </div>
         <p>
           Inte medlem?
