@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const users = require('./users');
-const integration = require('./integration');
+const integrations = require('./integrations');
 const items = require('./items');
 
 
 router.use('/users', users);
-router.use('/integration', integration);
+router.use('/integrations', integrations);
 router.use('/items', items);
 
 module.exports = router;

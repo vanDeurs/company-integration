@@ -14,11 +14,6 @@ const IntegrationSchema = Schema({
     ref: 'User',
     required: true
   },
-  isActive: {
-    type: Boolean,
-    default: true,
-    required: true
-  },
   created: {
     type: Number,
     default: Date.now,
