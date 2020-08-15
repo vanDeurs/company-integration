@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -10,17 +11,7 @@ require('./api/db/index');
 // Initiate models
 require('./api/models');
 
-// Set up CORS
-app.use((req, res, next) => {
-  console.log(`${req.method} at ${req.path}`);
-  const { origin } = req.headers;
-  res.setHeader('Access-Control-Allow-Origin', origin);
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'x-auth, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  next();
-});
+app.use(cors());
 
 // Router setup
 const router = require('./api/routes');
