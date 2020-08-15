@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> -->
+    <div id="nav" v-if="this.$store.state.auth.user">
+      <router-link to="/">Start</router-link> |
+      <router-link to="/saker">Saker</router-link>
+      <router-link to="/logga-ut">Logga ut</router-link>
     </div>
     <router-view />
   </div>
