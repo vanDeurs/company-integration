@@ -8,6 +8,7 @@ const state = {
 
 const mutations = {
   SET_USER(state, payload) {
+    console.log('SET_USER: ', payload);
     if (payload === null) {
       state.user = null;
       return;
@@ -22,7 +23,7 @@ const mutations = {
 const actions = {
   async AUTHENTICATE(context) {
     try {
-      const response = await api.get("/users/authenticate");
+      const response = await api().post("/users/authenticate");
       const user = response.data;
       if (user) {
         context.commit("SET_USER", user);
@@ -34,7 +35,7 @@ const actions = {
   },
   async SIGN_OUT(context) {
     try {
-      await api.delete("/users/sign-out");
+      await api().delete("/users/sign-out");
     } catch (error) {
       console.log(error);
     }

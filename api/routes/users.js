@@ -10,7 +10,8 @@ const {
 } = users;
 
 router.post('/sign-in', signIn);
-router.delete('/sign-out', authenticate, authenticateWall, signOut);
+router.delete('/sign-out', authenticate, signOut);
 router.post('/sign-up', signUp);
+router.post('/authenticate', authenticate, authenticateWall, (req, res) => res.status(200).json(req.me));
 
 module.exports = router;

@@ -39,17 +39,28 @@ const routes = [
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
+  base: "/",
   routes
 });
 
-async function protectedRoute() {
-  if (store.state.auth.user === undefined || !Cookies.get("token")) {
+async function protectedRoute(from, to, next) {
+  const { user } = store.state.auth;
+  const token = Cookies.get("token");
+
+  console.log("user: ", user);
+  console.log("token: ", token);
+
+  if (!token) {
+    return router.push("/sign-in");
+  }
+
+  if (!user) {
     await store.dispatch("AUTHENTICATE");
+    if (!store.state.auth.user) {
+      return store.dispatch("SIGN_OUT");
+    }
   }
-  if (!store.state.auth.user) {
-    store.dispatch("SIGN_OUT");
-  }
+  next()
 }
 
 export default router;
