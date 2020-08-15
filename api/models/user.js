@@ -68,13 +68,14 @@ UserSchema.statics.findByToken = async function (token) {
     const user = await User.findOne({ token });
     if (!user) return null;
 
+    // If the token is valid, return the correct user
     jwt.verify(token, process.env.TOKEN_SECRET);
+
+    return user;
 
   } catch (error) {
     return null;
   }
-  // If the token is valid, return the correct user
-  return user;
 }
 
 UserSchema.statics.findByCredentials = async function (data) {
