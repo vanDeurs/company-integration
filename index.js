@@ -12,7 +12,7 @@ require('./api/models');
 
 // Set up CORS
 app.use((req, res, next) => {
-  console.log('req: ', req);
+  console.log(`${req.method} at ${req.path}`);
   const { origin } = req.headers;
   res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -20,7 +20,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Credentials', true);
 
   next();
-})
+});
 
 // Router setup
 const router = require('./api/routes');
