@@ -23,7 +23,15 @@ exports.signIn = async (req, res) => {
   }
 }
 exports.signOut = async (req, res) => {
-
+  if (req.me) {
+    try {
+      await req.me.removeToken();
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  }
+  req.me = null;
+  res.status(204).send();
 }
 exports.signUp = async (req, res) => {
   const { email, name, password } = req.body;
