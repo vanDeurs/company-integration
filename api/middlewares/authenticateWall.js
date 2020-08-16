@@ -1,6 +1,6 @@
 const authenticateWall = (req, res, next) => {
     if (!req.me) {
-      throw Error('NOT AUTHENTICATED')
+      throw Error("NOT AUTHENTICATED")
     }
     next()
 

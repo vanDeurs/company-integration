@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { uuidv4 } = require('../utils/uuid4');
+const mongoose = require("mongoose");
+const { uuidv4 } = require("../utils/uuid4");
 
 const Schema = mongoose.Schema;
 
@@ -11,7 +11,7 @@ const IntegrationSchema = Schema({
   },
   owner: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true
   },
   created: {
@@ -25,15 +25,15 @@ IntegrationSchema.statics.findByKey = async function (apiKey) {
   const Integration = this;
   try {
     const integration = await Integration.findOne({ apiKey, isActive: true })
-    .populate('owner');
+    .populate("owner");
 
     return integration
   } catch (error) {
-    console.log('error: ', error);
+    console.log("error: ", error);
     return null;
   }
 }
 
-const IntegrationModel = mongoose.model('Integration', IntegrationSchema);
+const IntegrationModel = mongoose.model("Integration", IntegrationSchema);
 
 module.exports = IntegrationModel;

@@ -6,15 +6,11 @@
         <input
           v-model="email"
           placeholder="E-mail"
-          :class="{ error: (errors.error && !email) || errors.password_email }"
         />
         <input
           type="password"
           v-model="password"
           placeholder="Password"
-          :class="{
-            error: (errors.error && !password) || errors.password_email
-          }"
         />
         <p v-if="errors.password_email" class="error">
           {{ errors.password_email }}

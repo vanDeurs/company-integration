@@ -1,39 +1,39 @@
-const swaggerJSDoc = require('swagger-jsdoc')
+const swaggerJSDoc = require("swagger-jsdoc")
 
 const swaggerDefinition = {
-  openapi: '3.0.0',
+  openapi: "3.0.0",
   info: {
-    title: 'API Integration',
-    version: '0.0.1',
+    title: "API Integration",
+    version: "0.0.1",
   },
-  basePath: '/',
+  basePath: "/",
   tags: [
     {
-      name: 'users',
+      name: "users",
       description: "Users"
     },
     {
-      name: 'items',
+      name: "items",
       description: "items"
     },
     {
-      name: 'integrations',
+      name: "integrations",
       description: "Integrations"
     },
   ],
   components: {
     securitySchemes: {
-      'x-api-key': {
-        type: 'apiKey',
-        name: 'x-api-key',
-        in: 'header'
+      "x-api-key": {
+        type: "apiKey",
+        name: "x-api-key",
+        in: "header"
       }
     }
   }
 }
 const options = {
   swaggerDefinition,
-  apis: ['./api/controllers/**.js']
+  apis: ["./api/controllers/**.js"]
 }
 
 const swaggerSpec = swaggerJSDoc(options)

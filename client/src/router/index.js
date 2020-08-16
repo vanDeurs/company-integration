@@ -1,8 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import SignIn from "../views/SignIn.vue";
-// import SignUp from "../views/SignUp.vue";
-// import Developer from "../views/Developer.vue";
 import Cookies from "js-cookie";
 import store from "@/store";
 
@@ -32,6 +30,13 @@ const routes = [
     name: "Developer",
     component: () =>
       import("../views/Developer.vue"),
+    beforeEnter: protectedRoute
+  },
+  {
+    path: "/items",
+    name: "Items",
+    component: () =>
+      import("../views/Items.vue"),
     beforeEnter: protectedRoute
   },
 ];

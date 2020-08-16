@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require("../models/user");
 
 exports.signIn = async (req, res) => {
   const { email, password } = req.body;
@@ -7,7 +7,7 @@ exports.signIn = async (req, res) => {
     if (user) {
       const token = await user.generateAuthToken();
       if (token) {
-        return res.header('x-auth', token).status(200).json({
+        return res.header("x-auth", token).status(200).json({
           user: {
             items: user.items,
             name: user.name,
@@ -16,10 +16,10 @@ exports.signIn = async (req, res) => {
         })
       }
     }
-    res.status(400).json({ message: 'Invalid e-mail or password.' })
+    res.status(400).json({ message: "Invalid e-mail or password." })
   } catch (error) {
-    console.log('signIn error: ', error);
-    res.status(400).json({ message: 'Invalid e-mail or password.' })
+    console.log("signIn error: ", error);
+    res.status(400).json({ message: "Invalid e-mail or password." })
   }
 }
 exports.signOut = async (req, res) => {
@@ -27,7 +27,7 @@ exports.signOut = async (req, res) => {
     try {
       await req.me.removeToken();
     } catch (error) {
-      console.log('error: ', error);
+      console.log("error: ", error);
     }
   }
   req.me = null;

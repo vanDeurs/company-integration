@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const Schema = mongoose.Schema;
 
@@ -15,7 +15,7 @@ const UserSchema = Schema({
   },
   items: [{
     type: Schema.Types.ObjectId,
-    ref: 'Item'
+    ref: "Item"
   }],
   password: {
     type: String,
@@ -26,12 +26,12 @@ const UserSchema = Schema({
   },
   apiKeys: [{
     type: Schema.Types.ObjectId,
-    ref: 'Integration'
+    ref: "Integration"
   }]
 });
 
-UserSchema.pre('save', function (next) {
-  if (!this.isModified('password')) return next();
+UserSchema.pre("save", function (next) {
+  if (!this.isModified("password")) return next();
 
   const { password } = this;
   const salt = bcrypt.genSaltSync(10);
@@ -50,7 +50,7 @@ UserSchema.methods.generateAuthToken = async function () {
   const user = this;
 
   // Create login token
-  const token = jwt.sign({ _id: user._id.toHexString() }, process.env.TOKEN_SECRET, { expiresIn: '24h' }).toString();
+  const token = jwt.sign({ _id: user._id.toHexString() }, process.env.TOKEN_SECRET, { expiresIn: "24h" }).toString();
 
   // Add token to user
   user.token = token;
@@ -91,7 +91,7 @@ UserSchema.statics.findByCredentials = async function (data) {
 
   try {
     const user = await User.findOne({ email })
-    .populate('items apiKeys');
+    .populate("items apiKeys");
   
     if (user) {
       const passwordMatch = await bcrypt.compare(password, user.password);
@@ -100,12 +100,12 @@ UserSchema.statics.findByCredentials = async function (data) {
       }
     }
   } catch (error) {
-    console.log('error: ', error);
+    console.log("error: ", error);
     return null;
   }
   return null;
 }
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model("User", UserSchema);
 
 module.exports = UserModel;

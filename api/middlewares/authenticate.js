@@ -1,13 +1,13 @@
-const User = require('../models/user');
-const Integration = require('../models/integration');
+const User = require("../models/user");
+const Integration = require("../models/integration");
 
 const authenticate = async (req, res, next) => {
   /**
    * Authenticate the user either by the token (logged in),
    * or by the apiKey (integration).
    */
-    const token = req.headers['x-auth'];
-    const apiKey = req.headers['x-api-key'];
+    const token = req.headers["x-auth"];
+    const apiKey = req.headers["x-api-key"];
 
     if (token) {
       try {
@@ -25,7 +25,7 @@ const authenticate = async (req, res, next) => {
           req.me = integration.owner;
         }
       } catch (error) {
-        console.log('error: ', error);
+        console.log("error: ", error);
       }
     }
 
