@@ -11,6 +11,6 @@ const {
 
 router.get('/', authenticate, authenticateWall, getApiKeys);
 router.post('/', authenticate, authenticateWall, createApiKey);
-router.delete('/', authenticate, authenticateWall, deleteApiKey);
+router.delete('/:id', authenticate, authenticateWall, deleteApiKey);
 
 module.exports = router;
