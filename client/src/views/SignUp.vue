@@ -74,12 +74,10 @@ export default {
           name,
           password
         });
-        if (response.data.user) {
-          const { user } = response.data;
-          this.$store.commit("SET_USER", user);
-          Cookies.set("token", user.token, { expires: 1 });
-          this.$router.push("/");
-        }
+        const { user } = response.data;
+        this.$store.commit("SET_USER", user);
+        Cookies.set("token", user.token, { expires: 1 });
+        this.$router.push("/");
       } catch (error) {
         const code = error.response.status;
         if (code === 422) {

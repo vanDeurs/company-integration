@@ -66,7 +66,7 @@ export default {
     };
   },
   methods: {
-    async fetchItems () {
+    async fetchItems() {
       try {
         const response = await api().get("/items");
         if (response) {
@@ -76,7 +76,7 @@ export default {
         console.log(error);
       }
     },
-    async createItem () {
+    async createItem() {
       this.creatingItem = true;
       try {
         const response = await api().post("/items", { label: this.label });
