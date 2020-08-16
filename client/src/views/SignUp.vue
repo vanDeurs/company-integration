@@ -5,35 +5,29 @@
         <h2>Registera dig</h2>
         <input
           v-model="email"
-          placeholder="E-mail"
-          :class="{ error: (errors.error && !email) || errors.email }"
+          placeholder="Email"
         />
-        <p v-if="errors.email" class="error">
+        <p v-if="errors.email">
           {{ errors.email }}
         </p>
         <input
           v-model="name"
-          placeholder="name"
-          :class="{ error: errors.error && !name }"
+          placeholder="Namn"
         />
         <input
           type="password"
           v-model="password"
-          placeholder="Password"
-          :class="{ error: (errors.error && !password) || errors.password }"
+          placeholder="Lösenord"
         />
         <input
           type="password"
           v-model="passwordRepeat"
-          placeholder="Repeat password"
-          :class="{
-            error: (errors.error && !passwordRepeat) || errors.password
-          }"
+          placeholder="Repetera lösenord"
         />
-        <p v-if="errors.password" class="error">
+        <p v-if="errors.password">
           {{ errors.password }}
         </p>
-        <p v-if="errors.error" class="error">
+        <p v-if="errors.error">
           {{ errors.error }}
         </p>
         <div class="text-right">
@@ -66,10 +60,10 @@ export default {
       const { email, name, password, passwordRepeat } = this;
 
       if (!email || !name || !password || !passwordRepeat) {
-        this.errors = { ...this.errors, error: "All fields are required." };
+        this.errors = { ...this.errors, error: "Du måste fylla i alla fält." };
       }
       if (password !== passwordRepeat) {
-        this.errors = { ...this.errors, password: "Passwords do not match." };
+        this.errors = { ...this.errors, password: "Lösenorden matchar inte." };
       }
 
       if (this.errors.error || this.errors.password) return;
@@ -91,7 +85,7 @@ export default {
         if (code === 422) {
           this.errors = {
             ...this.errors,
-            email: "Email is already registered."
+            email: "Den här mejladressen finns redan."
           };
         }
       }
