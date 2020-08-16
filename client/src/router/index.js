@@ -1,9 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 import SignIn from "../views/SignIn.vue";
-import SignUp from "../views/SignUp.vue";
-import Developer from "../views/Developer.vue";
+// import SignUp from "../views/SignUp.vue";
+// import Developer from "../views/Developer.vue";
 import Cookies from "js-cookie";
 import store from "@/store";
 
@@ -18,28 +17,21 @@ const routes = [
   {
     path: "/sign-up",
     name: "SignUp",
-    component: SignUp
+    component: () =>
+      import("../views/SignUp.vue"),
   },
   {
     path: "/",
     name: "Home",
-    component: Home,
-    beforeEnter: protectedRoute
-  },
-  {
-    path: "/about",
-    name: "About",
-    beforeEnter: protectedRoute,
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import("../views/Home.vue"),
+    beforeEnter: protectedRoute
   },
   {
     path: "/developer",
     name: "Developer",
-    component: Developer,
+    component: () =>
+      import("../views/Developer.vue"),
     beforeEnter: protectedRoute
   },
 ];
