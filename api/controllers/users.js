@@ -13,13 +13,13 @@ exports.signIn = async (req, res) => {
             name: user.name,
             token
           }
-        })
+        });
       }
     }
-    res.status(400).json({ message: "Invalid e-mail or password." })
+    res.status(400).json({ message: "Invalid e-mail or password." });
   } catch (error) {
     console.log("signIn error: ", error);
-    res.status(400).json({ message: "Invalid e-mail or password." })
+    res.status(400).json({ message: "Invalid e-mail or password." });
   }
 }
 exports.signOut = async (req, res) => {
@@ -36,7 +36,7 @@ exports.signOut = async (req, res) => {
 exports.signUp = async (req, res) => {
   const { email, name, password } = req.body;
 
-  if (!email || !name || !password) return res.status(400).json({ message: "Missing parameters." })
+  if (!email || !name || !password) return res.status(400).json({ message: "Missing parameters." });
 
   try {
     const existingUser = await User.findOne({ email });

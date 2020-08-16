@@ -50,7 +50,8 @@ UserSchema.methods.generateAuthToken = async function () {
   const user = this;
 
   // Create login token
-  const token = jwt.sign({ _id: user._id.toHexString() }, process.env.TOKEN_SECRET, { expiresIn: "24h" }).toString();
+  const token = jwt.sign({ _id: user._id.toHexString() }, process.env.TOKEN_SECRET,
+  { expiresIn: "24h" }).toString();
 
   // Add token to user
   user.token = token;

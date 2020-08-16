@@ -28,11 +28,9 @@ const authenticate = async (req, res, next) => {
         console.log("error: ", error);
       }
     }
-
     next();
-
 }
 
 module.exports = {
     authenticate
-}
+};

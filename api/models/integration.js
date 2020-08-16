@@ -24,10 +24,10 @@ const IntegrationSchema = Schema({
 IntegrationSchema.statics.findByKey = async function (apiKey) {
   const Integration = this;
   try {
-    const integration = await Integration.findOne({ apiKey, isActive: true })
+    const integration = await Integration.findOne({ apiKey })
     .populate("owner");
 
-    return integration
+    return integration;
   } catch (error) {
     console.log("error: ", error);
     return null;

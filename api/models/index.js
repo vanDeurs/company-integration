@@ -6,4 +6,4 @@ module.exports = {
   user,
   item,
   integration
-}
+};

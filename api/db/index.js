@@ -5,8 +5,6 @@ const url = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.mdlzo.mongodb.net/
 
 mongoose.connect(url, {
   useNewUrlParser: true
-})
-.then(() => {
+}).then(() => {
   console.log("Connected to MongoDB.");
-})
-.catch(error => console.log("MongoDB error: ", error));
+}).catch(error => console.log("MongoDB error: ", error));
