@@ -44,7 +44,10 @@ exports.signUp = async (req, res) => {
       return res.status(422).json({ message: "This email is already registered." });
     }
     const user = await User.create(req.body);
-    res.status(201).json({ user });
+    const token = await user.generateAuthToken();
+    const data = { token, ...req.body };
+
+    res.status(201).json({ user: data });
   } catch (error) {
     console.log(error);
     res.status(422).json({ message: "Could not register." });
