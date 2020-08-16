@@ -17,11 +17,6 @@ app.use(cors());
 const router = require('./api/routes');
 app.use('/api', router);
 
-// Swagger setup
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./api/swagger');
-router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 // Start the server
 const { PORT, HOST } = process.env;
 app.listen(PORT, HOST, () => {

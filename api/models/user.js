@@ -87,6 +87,7 @@ UserSchema.methods.removeToken = function () {
 }
 
 UserSchema.statics.findByCredentials = async function (data) {
+  // Find the user by email, then confirm that the password is correct.
   const { email, password } = data;
   const User = this;
 
