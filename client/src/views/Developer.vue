@@ -39,19 +39,20 @@
           <div class="table column">
             <div>Skapad</div>
             <div>Användare</div>
-            <div>Märkning</div>
             <div>API nyckel</div>
           </div>
           <div class="table row" v-for="key in keys" :key="key._id">
-            <div>{{ key.created }}</div>
-            <div>{{ key.owner }}</div>
-            <div>{{ key.label }}</div>
+            <div>{{ new Date(key.created) }}</div>
+            <div>{{ key.owner.name }}</div>
             <div>{{ key.apiKey }}</div>
+            <button @click="deleteApiKey(key._id)">
+              {{ deletingKey ? "Raderar..." : "Radera" }}
+            </button>
           </div>
         </div>
         <div class="create-key-button-wrapper">
           <button @click="createApiKey()" class="success">
-            {{ this.creatingKey ? "Skapar API-nyckel..." : "Skapa API-nyckel" }}
+            {{ creatingKey ? "Skapar API-nyckel..." : "Skapa API-nyckel" }}
           </button>
         </div>
       </div>
@@ -73,7 +74,8 @@ export default {
    return {
       keys: [],
       creatingKey: false,
-      fetchingKeys: false
+      fetchingKeys: false,
+      deletingKey: false
     };
   },
   methods: {
@@ -87,6 +89,8 @@ export default {
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        this.fetchingKeys = false;
       }
     },
     async createApiKey () {
@@ -99,6 +103,20 @@ export default {
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        this.creatingKey = false;
+      }
+    },
+    async deleteApiKey(id) {
+      this.deletingKey = true;
+      try {
+        await api().delete(`/integrations/${id}`);
+        const updatedKeys = this.keys.filter(key => key._id !== id);
+        this.keys = updatedKeys;
+      } catch (error) {
+        console.log('error: ', error);
+      } finally {
+        this.deletingKey = false;
       }
     },
     readDocumentation () {
@@ -164,7 +182,7 @@ export default {
       border-top: 1px solid #dedddc;
       border-bottom: 1px solid #dedddc;
       margin-bottom: 30px;
-      min-width: 70%;
+      min-width: 100%;
 
       .table {
         display: flex;
