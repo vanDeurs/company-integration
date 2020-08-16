@@ -80,10 +80,10 @@ UserSchema.statics.findByToken = async function (token) {
 }
 
 UserSchema.methods.removeToken = function () {
-  const unit = this;
+  const user = this;
 
-  unit.token = undefined;
-  return unit.save();
+  user.token = undefined;
+  return user.save();
 }
 
 UserSchema.statics.findByCredentials = async function (data) {
