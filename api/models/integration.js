@@ -18,9 +18,6 @@ const IntegrationSchema = Schema({
     type: Number,
     default: Date.now,
     required: true
-  },
-  label: {
-    type: String
   }
 });
 
