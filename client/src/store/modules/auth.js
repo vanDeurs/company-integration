@@ -8,7 +8,6 @@ const state = {
 
 const mutations = {
   SET_USER(state, payload) {
-    console.log('SET_USER: ', payload);
     if (payload === null) {
       state.user = null;
       return;

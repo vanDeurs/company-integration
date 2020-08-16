@@ -51,9 +51,6 @@ async function protectedRoute(from, to, next) {
   const { user } = store.state.auth;
   const token = Cookies.get("token");
 
-  console.log("user: ", user);
-  console.log("token: ", token);
-
   if (!token) {
     return router.push("/sign-in");
   }
@@ -64,7 +61,7 @@ async function protectedRoute(from, to, next) {
       return store.dispatch("SIGN_OUT");
     }
   }
-  next()
+  next();
 }
 
 export default router;

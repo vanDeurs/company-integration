@@ -17,7 +17,6 @@ export default {
   name: "App",
   methods: {
     async signOut() {
-      console.log('hello');
       return store.dispatch("SIGN_OUT");
     }
   }

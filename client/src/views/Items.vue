@@ -6,15 +6,15 @@
         <p>Här kan du skapa nya saker.</p>
       </div>
       <div v-if="items.length == 0" class="no-items-wrapper">
-        <div class="ghost">
+        <div>
           <h2>Du har inga saker.</h2>
         </div>
-        <div class="text-right">
+        <div>
           <input
             v-model="label"
             placeholder="Sak"
           />
-          <button @click="createItem()" class="success">
+          <button @click="createItem()">
             {{ this.creatingItem ? "Skapar sak" : "Skapa sak" }}
           </button>
         </div>
@@ -54,7 +54,6 @@ import api from "@/api";
 
 export default {
   name: "Items",
-  components: {},
   created () {
     this.fetchItems();
   },
@@ -71,7 +70,6 @@ export default {
       try {
         const response = await api().get("/items");
         if (response) {
-          console.log("response: ", response);
           this.items = response.data;
         }
       } catch (error) {
@@ -83,7 +81,6 @@ export default {
       try {
         const response = await api().post("/items", { label: this.label });
         if (response) {
-          console.log("response: ", response);
           this.items.push(response.data);
         }
       } catch (error) {

@@ -1,7 +1,7 @@
 <template>
   <div class="sign-in">
-    <div class="container">
-      <form class="form box-shadow-1" @submit.prevent="onSubmit">
+    <div>
+      <form @submit.prevent="onSubmit">
         <h2>Logga in</h2>
         <input
           v-model="email"
@@ -12,14 +12,14 @@
           v-model="password"
           placeholder="Password"
         />
-        <p v-if="errors.password_email" class="error">
+        <p v-if="errors.password_email">
           {{ errors.password_email }}
         </p>
-        <p v-if="errors.error" class="error">
+        <p v-if="errors.error">
           {{ errors.error }}
         </p>
-        <div class="text-right">
-          <button class="success">Logga in</button>
+        <div>
+          <button>Logga in</button>
         </div>
         <p>
           Inte medlem?

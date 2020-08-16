@@ -1,35 +1,16 @@
 <template>
   <div class="container">
     <h2 class="header">API nycklar</h2>
-    <div class="info-row">
-      <div class="about">
-        <h3>Om</h3>
-        <p>
-          Vindens API tillåter dig att integrera Vinden funktioner i din egen
-          applikation. För att authentisera dig så skapar du en API-nyckel nedan
-          som du passar med i headers som x-auth.
-        </p>
-      </div>
-      <div class="documentation">
-        <h3>API dokumentation</h3>
-        <p>Vi har en dokumentation som du som utvecklare kan använda för att integrera Vindens API i din applikation.
-        </p>
-        <button @click="readDocumentation()" class="success">
-          API dokumentation
-        </button>
-      </div>
-    </div>
     <div class="api-keys-wrapper">
       <div class="api-keys-info">
-        <h3>Dina API nycklar</h3>
         <p>API-nycklar ger fullständig tillgång till ditt konto så håll dem säkra.</p>
       </div>
       <div v-if="keys.length == 0" class="no-keys-wrapper">
-        <div class="ghost">
+        <div>
           <h2>Du har inga api-nycklar.</h2>
         </div>
-        <div class="text-right">
-          <button @click="createApiKey()" class="success">
+        <div>
+          <button @click="createApiKey()">
             {{ this.creatingKey ? "Skapar API-nyckel..." : "Skapa API-nyckel" }}
           </button>
         </div>
@@ -65,7 +46,6 @@ import api from "@/api";
 
 export default {
   name: "Developer",
-  components: {},
   created () {
     this.fetchApiKeys();
   },
@@ -83,7 +63,6 @@ export default {
       try {
         const response = await api().get("/integrations");
         if (response) {
-          console.log("response: ", response);
           this.keys = response.data;
         }
       } catch (error) {
@@ -97,7 +76,6 @@ export default {
       try {
         const response = await api().post("/integrations");
         if (response) {
-          console.log("response: ", response);
           this.keys.push(response.data);
         }
       } catch (error) {
@@ -118,9 +96,7 @@ export default {
         this.deletingKey = false;
       }
     },
-    readDocumentation () {
-
-    }
+    readDocumentation () {}
   }
 };
 </script>
@@ -134,23 +110,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  .info-row {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: 60px;
-
-    .about {
-      display: flex;
-      flex-direction: column;
-      max-width: 400px;
-    }
-    .documentation {
-      display: flex;
-      flex-direction: column;
-      max-width: 400px;
-    }
   }
   .api-keys-wrapper {
     display: flex;

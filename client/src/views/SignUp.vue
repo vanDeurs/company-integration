@@ -1,15 +1,12 @@
 <template>
   <div class="sign-up">
-    <div class="container content">
-      <form class="form box-shadow-1" @submit.prevent="register()">
+    <div>
+      <form @submit.prevent="register()">
         <h2>Registera dig</h2>
         <input
           v-model="email"
           placeholder="Email"
         />
-        <p v-if="errors.email">
-          {{ errors.email }}
-        </p>
         <input
           v-model="name"
           placeholder="Namn"
@@ -24,14 +21,17 @@
           v-model="passwordRepeat"
           placeholder="Repetera lösenord"
         />
+        <p v-if="errors.email">
+          {{ errors.email }}
+        </p>
         <p v-if="errors.password">
           {{ errors.password }}
         </p>
         <p v-if="errors.error">
           {{ errors.error }}
         </p>
-        <div class="text-right">
-          <button class="success">Registera</button>
+        <div>
+          <button>Registera</button>
         </div>
         <p>Redan medlem? <router-link to="/sign-in">Logga in!</router-link></p>
       </form>
